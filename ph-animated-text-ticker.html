@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
+* `ph-animated-text-ticker` component provides a simple sliding text ticker.
+*
 * The `ph-animated-text-ticker` component  gives you the ability to let text slide in an environment where the text hasn't enough
 * space to be fully shown. You may know that behaviour from some hardware devices like car radios or MP3 players.
 * When the text hasn't enough space he'll slide with a smooth ease function from right to left in respect to the ratio
@@ -54,10 +56,9 @@
 *
 * @group Standard Elements
 * @element ph-animated-text-ticker
-* @homepage https://silenthoo.github.io/ph-animated-text-ticker
-* @demo https://silenthoo.github.io/ph-animated-text-ticker/demo.html
+* @homepage https://eudes.github.io/ph-animated-text-ticker
+* @demo
 -->
-
 <dom-module id="ph-animated-text-ticker">
   <style>
       :host {
@@ -190,8 +191,6 @@
           },
 
 
-
-
         _messages: {
           type: Object,
           value: function(){
@@ -221,6 +220,7 @@
          *
          * @method addMessage
          * @param {String} msg
+         *
          */
         addMessage: function(msg) {
           this.push('_messages', msg);
