@@ -17,12 +17,20 @@ started.
 
 Example (declarative):
 
-    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III), Bomfunk MCs - Freestyler, Kris Kross - Jump"></ph-animated-text-ticker>
+    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
 
     <ph-animated-text-ticker
-      animationPause="3000"
-      animationSpeed="10000"
-      msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator, Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+      animation-pause="3000"
+      animation-speed="10000"
+      show-first-separator
+      show-last-separator
+      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+    </ph-animated-text-ticker>
+
+    <ph-animated-text-ticker
+      animation-pause="3000"
+      animation-speed="10000"
+      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
     </ph-animated-text-ticker>
 
 Example (imperative):
@@ -49,9 +57,8 @@ Example (imperative):
 @demo https://silenthoo.github.io/ph-animated-text-ticker/demo.html
 -->
 
-<polymer-element name="ph-animated-text-ticker" attributes="msgs separator animationPause animationSpeed">
-  <template>
-    <style>
+<dom-module id="ph-animated-text-ticker">
+  <style>
       :host {
         display: block;
         overflow: hidden;
@@ -68,22 +75,24 @@ Example (imperative):
       .separator {
         text-shadow: 1px 0px 0 rgb(202,202,202);
         color: #0066bb;
+        margin: auto 0.4em;
       }
-    </style>
+  </style>
+
+  <template>
+
 
     <div id="wrapper">
       <!-- for all messages, we create a text string with some separators -->
-      <template repeat="{{ m, idx in _messages }}">
-        <span class="separator">[[ separator ]]</span> {{ m }} <template if="{{ idx == _messages.length - 1 }}"><span class="separator">[[ separator ]]</span></template>
-      </template>
+      <template is="dom-repeat" items="{{ _messages }}"><template is="dom-if" if="{{ checkFirst(index) }}"><span class="separator">[[ separator ]]</span></template>{{ item }}<template is="dom-if" if="{{ checkLast(index, _messages) }}"><span class="separator">[[ separator ]]</span></template></template>
+
     </div>
   </template>
 
   <script>
-    (function () {
+    PhAnimatedTextTicker = Polymer({
 
-      Polymer({
-
+        is: 'ph-animated-text-ticker',
         /**
          * Fired when the animation starts.
          *
@@ -96,8 +105,7 @@ Example (imperative):
          * @event animation-stop
          */
 
-        publish: {
-
+        properties:{
           /**
            * The messages used to slide around when there isn't enough space. Valid strings are all sorts of strings
            * without any markup (HTML, script).
@@ -106,7 +114,12 @@ Example (imperative):
            * @type String
            * @default ''
            */
-          msgs: '',
+          msgs: {
+            type: String,
+            reflectToAttribute: true,
+            value: '',
+            observer: '_onChangeMsgs',
+          },
 
           /**
            * The separator used for each message to separate from the other.
@@ -115,7 +128,23 @@ Example (imperative):
            * @type String
            * @default '+++'
            */
-          separator: '+++',
+          separator: {
+            type: String,
+            reflectToAttribute: true,
+            value: '+++',
+          },
+
+          showFirstSeparator: {
+            type: Boolean,
+            reflectToAttribute: false,
+            value: false,
+          },
+
+          showLastSeparator: {
+            type: Boolean,
+            reflectToAttribute: false,
+            value: false,
+          },
 
           /**
            * The duration (in ms) the text keeps it's position after one side is reached. After the given time
@@ -125,7 +154,11 @@ Example (imperative):
            * @type Integer
            * @default 2000
            */
-          animationPause: 2000,
+          animationPause: {
+            type: Number,
+            reflectToAttribute: true,
+            value: 2000,
+          },
 
           /**
            * The duration (in ms) factor the animation needs to finish. This value will be used together with the ratio
@@ -136,10 +169,21 @@ Example (imperative):
            * @type Integer
            * @default 4000
            */
-          animationSpeed: 4000
-        },
+          animationSpeed: {
+            type: Number,
+            reflectToAttribute: true,
+            value: 4000,
+          },
 
-        _messages: [],
+
+
+
+        _messages: {
+          type: Object,
+          value: function(){
+            return [];
+          },
+        },
         _animationDuration: 0,
         _pixelToMove: '0px',
         _stopAnimationJobs: false,
@@ -147,11 +191,16 @@ Example (imperative):
         _resizeTimer: 0,
 
         _animationEnum: {
-          NOT_STARTED: 0,
-          RUNNING: 1,
-          STOPPED: 2
+          type: Object,
+          value: function(){
+            return{
+              NOT_STARTED: 0,
+              RUNNING: 1,
+              STOPPED: 2};
+          },
         },
         _animationState: 0,
+      },
 
         /**
          * Adds a new String message to display.
@@ -160,7 +209,7 @@ Example (imperative):
          * @param {String} msg
          */
         addMessage: function(msg) {
-          this._messages.push(msg);
+          this.push('_messages', msg);
         },
 
         /**
@@ -180,9 +229,11 @@ Example (imperative):
           this._prepareMessages();
         },
 
-        domReady: function() {
-          this._init();
-          this._addResizeEvent();
+        attached: function() {
+          this.async(function(){
+            this._init();
+            this._addResizeEvent();
+          });
         },
 
         detached: function() {
@@ -192,6 +243,7 @@ Example (imperative):
 
         // ===== private methods =====
         _init: function() {
+          window.asdf = this;
           var slideMode = this.$.wrapper.clientWidth > this.clientWidth;
 
           if (slideMode) {
@@ -206,6 +258,11 @@ Example (imperative):
           }
         },
 
+        _onChangeMsgs: function(){
+
+          this._prepareMessages();
+          this.debounce('initDelay',this._init, 100);
+        },
         _addResizeEvent: function() {
           window.addEventListener('resize', this._onResizeWindow.bind(this));
         },
@@ -228,8 +285,8 @@ Example (imperative):
             return;
           }
 
-          var strings = this.msgs.split(',');
-          strings.map(function(el) {
+          var strings = this.msgs.split(';');
+          strings = strings.map(function(el) {
             return el.trim();
           });
 
@@ -254,7 +311,7 @@ Example (imperative):
           this._pixelToMove       = this.$.wrapper.clientWidth - this.clientWidth;
 
           this.$.wrapper.style.transitionDuration = this._animationDuration + 's';
-          this.job('delay', this._moveLeft, this.animationPause);
+          this.debounce('delay', this._moveLeft, this.animationPause);
         },
 
         _moveLeft: function() {
@@ -264,24 +321,45 @@ Example (imperative):
           }
 
           this.$.wrapper.style.transform = 'translateX(-' + this._pixelToMove + 'px)';
-          this.job('delay', this._moveRight, this._animationDuration * 1000 + this.animationPause);
+          this.debounce('delay', this._moveRight, this._animationDuration * 1000 + this.animationPause);
         },
 
         _moveRight: function() {
           this.$.wrapper.style.transform = 'translateX(0px)';
 
           if (this._stopAnimationJobs) {
-            this.job('delay the state update to the animation end we started with CSS', function() {
+            this.debounce('delay the state update to the animation end we started with CSS', function() {
               this._animationState = this._animationEnum.STOPPED;
               this._stopAnimationJobs = false;
             }, parseInt(Math.ceil(this._animationDuration)) * 1000);
             return;
           }
 
-          this.job('delay', this._moveLeft, this._animationDuration * 1000 + this.animationPause);
-        }
+          this.debounce('delay', this._moveLeft, this._animationDuration * 1000 + this.animationPause);
+        },
+
+        isLast: function(ind, arr){
+          if(ind == (arr.length)){
+            return true;
+          }else{
+            return false;
+          };
+        },
+        isFirst: function(ind){
+          if(ind == 0){
+            return true;
+          }else{
+            return false;
+          };
+        },
+        checkFirst: function(ind){
+          return (!this.isFirst(ind) || (this.isFirst(ind) && this.showFirstSeparator) );
+        },
+        checkLast: function(ind, arr){
+          return (this.showLastSeparator && this.isLast(ind,arr));
+        },
+
       });
 
-    })();
   </script>
-</polymer-element>
+</dom-module>

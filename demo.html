@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>ph-animated-text-ticker Demo</title>
 
   <script src="../webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="ph-animated-text-ticker.html">
+  <link rel="import" href="./ph-animated-text-ticker.html">
 
   <style>
     ph-animated-text-ticker {
@@ -36,21 +37,22 @@
   <br><br>
   <div class="small">
     <!-- #1 -->
-    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III), Bomfunk MCs - Freestyler, Kris Kross - Jump"></ph-animated-text-ticker>
-
-    <br>
-
-    <!-- #2 -->
+    <p>Without first or last separator (default)</p>
     <ph-animated-text-ticker
-      animationPause="3000"
-      animationSpeed="10000"
-      msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator, Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+      animation-pause="3000"
+      animation-speed="10000"
+      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
     </ph-animated-text-ticker>
 
+
+    <br>
+    <p>With first and last separator</p>
+    <!-- #2 -->
+        <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump" show-first-separator show-last-separator></ph-animated-text-ticker>
     <br>
 
     <!-- #3 -->
-    <ph-animated-text-ticker class="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
+    <ph-animated-text-ticker class="ticker" separator="/\" animation-pause="3000" animation-speed="5000"></ph-animated-text-ticker>
   </div>
   <br><br>
 
@@ -58,21 +60,21 @@
   <br><br>
   <div class="medium">
     <!-- #1 -->
-    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III), Bomfunk MCs - Freestyler, Kris Kross - Jump"></ph-animated-text-ticker>
+    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
 
     <br>
 
     <!-- #2 -->
     <ph-animated-text-ticker
-      animationPause="3000"
-      animationSpeed="10000"
-      msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator, Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+      animation-pause="3000"
+      animation-speed="10000"
+      msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
     </ph-animated-text-ticker>
 
     <br>
 
     <!-- #3 -->
-    <ph-animated-text-ticker class="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
+    <ph-animated-text-ticker class="ticker" separator="/\" animation-pause="3000" animation-speed="5000"></ph-animated-text-ticker>
   </div>
   <br><br>
 
@@ -80,21 +82,21 @@
   <br><br>
   <div class="big">
     <!-- #1 -->
-    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III), Bomfunk MCs - Freestyler, Kris Kross - Jump"></ph-animated-text-ticker>
+    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
 
     <br>
 
     <!-- #2 -->
     <ph-animated-text-ticker
-      animationPause="3000"
-      animationSpeed="10000"
-      msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator, Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+      animation-pause="3000"
+      animation-speed="10000"
+      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
     </ph-animated-text-ticker>
 
     <br>
 
     <!-- #3 -->
-    <ph-animated-text-ticker class="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
+    <ph-animated-text-ticker class="ticker" separator="/\" animation-pause="3000" animation-speed="5000"></ph-animated-text-ticker>
   </div>
 
   <br><br>
@@ -102,21 +104,21 @@
   <strong>Resize space (resize your browser window and wait until animations stop to see effect)</strong>
   <br><br>
   <!-- #1 -->
-  <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III), Bomfunk MCs - Freestyler, Kris Kross - Jump"></ph-animated-text-ticker>
+  <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
 
   <br>
 
   <!-- #2 -->
   <ph-animated-text-ticker
-    animationPause="3000"
-    animationSpeed="10000"
-    msgs="YouTube Now Streams HTML5 Video By Default, Europe Gets A Cyber Security Incubator, Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+    animation-pause="3000"
+    animation-speed="10000"
+    msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
   </ph-animated-text-ticker>
 
   <br>
 
   <!-- #3 -->
-  <ph-animated-text-ticker class="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
+  <ph-animated-text-ticker class="ticker" separator="/\" animation-pause="3000" animation-speed="5000"></ph-animated-text-ticker>
 </body>
 
 <script>

@@ -10,6 +10,8 @@ the space is small and the text long.
 You can style the text like you want as of every web component you know. Please use the pseudo selectors `::shadow` and
 `/deep/` as you prefer. I'll not change any `HTMLElement id` or `class name` within the components `<template>` in the
 next minor versions so you can be sure that your component will not break in the upcoming minor versions.
+**Note**: As of V1.1.0, there is a minor breaking change. This element now implements boolean properties  `show-first-separator` and `show-last-separator`. The previous version did not need or have this option, so **you will lose** those separators if you don't declare your tag as:
+`<ph-animated-text-ticker show-first-separator show-last-separator>`
 
 There's also a built-in resize event handler which handles the animations if the user resizes the browser. If there's
 enough space available and the user can see all the messages no animation will start, otherwise an animation will be
@@ -25,7 +27,7 @@ Run the command above from your project root.
 
 Import the component by adding this to your HTML file:
 
-`<link rel="import" href="components/ph-animated-text-ticker/ph-animated-text-ticker.html">`
+`<link rel="import" href="bower_components/ph-animated-text-ticker/ph-animated-text-ticker.html">`
 
 ## 3. Use / Demo
 
