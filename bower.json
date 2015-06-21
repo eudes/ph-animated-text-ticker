@@ -1,11 +1,11 @@
 {
+  "name": "ph-animated-text-ticker",
+  "version": "1.1.0",
   "authors": [
     "Patrick Hillert",
     "Eudes Ochoa <me@eudes.es> (http://eudes.es)"
     ],
-  "name": "ph-animated-text-ticker",
   "description": "An animated and responsive text ticker for any use.",
-  "version": "1.1.0",
   "license": "BSD",
   "keywords": [
     "responsive",
@@ -23,6 +23,7 @@
     "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^3.1.7"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
   }
 }
