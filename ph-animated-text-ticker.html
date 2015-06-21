@@ -85,7 +85,7 @@ Example (imperative):
 
     <div id="wrapper">
       <!-- for all messages, we create a text string with some separators -->
-      <template is="dom-repeat" items="{{ _messages }}"><template is="dom-if" if="{{ checkFirst(index) }}"><span class="separator">[[ separator ]]</span></template>{{ item }}<template is="dom-if" if="{{ checkLast(index, _messages) }}"><span class="separator">[[ separator ]]</span></template></template>
+      <template is="dom-repeat" items="{{ _messages }}"><template is="dom-if" if="{{ _checkFirst(index) }}"><span class="separator">[[ separator ]]</span></template>{{ item }}<template is="dom-if" if="{{ _checkLast(index, _messages) }}"><span class="separator">[[ separator ]]</span></template></template>
 
     </div>
   </template>
@@ -135,12 +135,25 @@ Example (imperative):
             value: '+++',
           },
 
+          /**
+           * Wheter a separator preceeding the first message should be used.
+           *
+           * @attribute showFirstSeparator
+           * @type Boolean
+           * @default 'false'
+           */
           showFirstSeparator: {
             type: Boolean,
             reflectToAttribute: false,
             value: false,
           },
-
+          /**
+           * Wheter a separator after the last message should be used.
+           *
+           * @attribute showLastSeparator
+           * @type Boolean
+           * @default 'false'
+           */
           showLastSeparator: {
             type: Boolean,
             reflectToAttribute: false,
@@ -339,25 +352,25 @@ Example (imperative):
           this.debounce('delay', this._moveLeft, this._animationDuration * 1000 + this.animationPause);
         },
 
-        isLast: function(ind, arr){
+        _isLast: function(ind, arr){
           if(ind == (arr.length)){
             return true;
           }else{
             return false;
           };
         },
-        isFirst: function(ind){
+        _isFirst: function(ind){
           if(ind == 0){
             return true;
           }else{
             return false;
           };
         },
-        checkFirst: function(ind){
-          return (!this.isFirst(ind) || (this.isFirst(ind) && this.showFirstSeparator) );
+        _checkFirst: function(ind){
+          return (!this._isFirst(ind) || (this._isFirst(ind) && this.showFirstSeparator) );
         },
-        checkLast: function(ind, arr){
-          return (this.showLastSeparator && this.isLast(ind,arr));
+        _checkLast: function(ind, arr){
+          return (this.showLastSeparator && this._isLast(ind,arr));
         },
 
       });
