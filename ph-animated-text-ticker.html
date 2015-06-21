@@ -1,61 +1,61 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-The `ph-animated-text-ticker` component  gives you the ability to let text slide in an environment where the text hasn't enough
-space to be fully shown. You may know that behaviour from some hardware devices like car radios or MP3 players.
-When the text hasn't enough space he'll slide with a smooth ease function from right to left in respect to the ratio
-between the length of the text string to show and the animation duration. That means the text will slide slower, if
-the space is small and the text long.
-
-You can style the text like you want as of every web component you know. Please use the pseudo selectors `::shadow` and
-`/deep/` as you prefer. I'll not change any `HTMLElement id` or `class name` within the components `<template>` in the
-next minor versions so you can be sure that your component will not break in the upcoming minor versions.
-**Note**: As of V1.1.0, there is a minor breaking change. This element now implements boolean properties  `show-first-separator` and `show-last-separator`. The previous version did not need or have this option, so **you will lose** those separators if you don't declare your tag as:
-
-There's also a built-in resize event handler which handles the animations if the user resizes the browser. If there's
-enough space available and the user can see all the messages no animation will start, otherwise an animation will be
-started.
-
-Example (declarative):
-
-    <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
-
-    <ph-animated-text-ticker
-      animation-pause="3000"
-      animation-speed="10000"
-      show-first-separator
-      show-last-separator
-      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
-    </ph-animated-text-ticker>
-
-    <ph-animated-text-ticker
-      animation-pause="3000"
-      animation-speed="10000"
-      msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
-    </ph-animated-text-ticker>
-
-Example (imperative):
-
-    <ph-animated-text-ticker id="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
-
-    <script>
-      (function () {
-        Polymer({
-          domReady: function() {
-            this.$.ticker.addMessage('Message #1');
-            this.$.ticker.addMessage('Message #2');
-            this.$.ticker.addMessage('Message #3');
-
-            this.$.ticker.removeMessage('Message #2');
-          }
-        });
-      })();
-    </script>
-
-@group Standard Elements
-@element ph-animated-text-ticker
-@homepage https://silenthoo.github.io/ph-animated-text-ticker
-@demo https://silenthoo.github.io/ph-animated-text-ticker/demo.html
+* The `ph-animated-text-ticker` component  gives you the ability to let text slide in an environment where the text hasn't enough
+* space to be fully shown. You may know that behaviour from some hardware devices like car radios or MP3 players.
+* When the text hasn't enough space he'll slide with a smooth ease function from right to left in respect to the ratio
+* between the length of the text string to show and the animation duration. That means the text will slide slower, if
+* the space is small and the text long.
+*
+* You can style the text like you want as of every web component you know. Please use the pseudo selectors `::shadow` and
+* `/deep/` as you prefer. I'll not change any `HTMLElement id` or `class name` within the components `<template>` in the
+* next minor versions so you can be sure that your component will not break in the upcoming minor versions.
+* **Note**: As of V1.1.0, there is a minor breaking change. This element now implements boolean properties  `show-first-separator` and `show-last-separator`. The previous version did not need or have this option, so **you will lose** those separators if you don't declare your tag as:
+*
+* There's also a built-in resize event handler which handles the animations if the user resizes the browser. If there's
+* enough space available and the user can see all the messages no animation will start, otherwise an animation will be
+* started.
+*
+* Example (declarative):
+*
+*     <ph-animated-text-ticker separator="♫" msgs="Armin van Buuren - Communication (Part III); Bomfunk MCs - Freestyler; Kris Kross - Jump"></ph-animated-text-ticker>
+*
+*     <ph-animated-text-ticker
+*       animation-pause="3000"
+*       animation-speed="10000"
+*       show-first-separator
+*       show-last-separator
+*       msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+*     </ph-animated-text-ticker>
+*
+*     <ph-animated-text-ticker
+*       animation-pause="3000"
+*       animation-speed="10000"
+*       msgs="YouTube Now Streams HTML5 Video By Default; Europe Gets A Cyber Security Incubator; Indian Messaging App Hike Rolls Out Free Voice-Calling Before WhatsApp">
+*     </ph-animated-text-ticker>
+*
+* Example (imperative):
+*
+*     <ph-animated-text-ticker id="ticker" separator="/\" animationPause="3000" animationSpeed="5000"></ph-animated-text-ticker>
+*
+*     <script>
+*       (function () {
+*         Polymer({
+*           domReady: function() {
+*             this.$.ticker.addMessage('Message #1');
+*             this.$.ticker.addMessage('Message #2');
+*             this.$.ticker.addMessage('Message #3');
+*
+*             this.$.ticker.removeMessage('Message #2');
+*           }
+*         });
+*       })();
+*     </script>
+*
+* @group Standard Elements
+* @element ph-animated-text-ticker
+* @homepage https://silenthoo.github.io/ph-animated-text-ticker
+* @demo https://silenthoo.github.io/ph-animated-text-ticker/demo.html
 -->
 
 <dom-module id="ph-animated-text-ticker">
